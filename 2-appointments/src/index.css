@@ -52,26 +52,26 @@ input[type="time"] {
     box-sizing: border-box;
 }
 
-.quote {
+.appointment {
   padding: 2rem;
   background: white;
   border-bottom: 1px solid #e1e1e1;
   color: black;
 }
 
-.quote p {
+.appointment p {
   font-weight: bold;
   margin-bottom: .8rem;
 }
-.quote p span {
+.appointment p span {
   font-weight: normal;
 
 }
-.quote:first-of-type {
+.appointment:first-of-type {
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }
-.quote:last-of-type {
+.appointment:last-of-type {
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
