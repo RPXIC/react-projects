@@ -1,7 +1,9 @@
-1 - basics - https://optimistic-pasteur-7e0596.netlify.app/
+1 - basics - https://basics-rpxic.netlify.app/
 
-2 - appointments - https://optimistic-cori-38ee2d.netlify.app/
+2 - appointments - https://appointments-rpxic.netlify.app/
 
-3 - budget - https://pensive-hawking-32273c.netlify.app/
+3 - budget - https://budget-rpxic.netlify.app
 
-4 - insurance calculator - https://epic-wilson-ed288a.netlify.app/
+4 - insurance calculator - https://insurance-rpxic.netlify.app/
+
+6 - weather app - https://weather-rpxic.netlify.app/
