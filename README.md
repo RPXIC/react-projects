@@ -6,4 +6,8 @@
 
 4 - insurance calculator - https://insurance-rpxic.netlify.app/
 
+5 - breaking bad quotes - https://breakingbad-rpxic.netlify.app/
+
 6 - weather app - https://weather-rpxic.netlify.app/
+
+7  cryptocurrencies - https://cryptocurencies-rpxic.netlify.app/
