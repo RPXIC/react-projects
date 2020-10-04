@@ -10,4 +10,7 @@
 
 6 - weather app - https://weather-rpxic.netlify.app/
 
-7  cryptocurrencies - https://cryptocurencies-rpxic.netlify.app/
+7 - cryptocurrencies - https://cryptocurencies-rpxic.netlify.app/
+
+9 - pixabay - https://pixabay-rpxic.netlify.app/
+
