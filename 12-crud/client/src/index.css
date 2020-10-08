@@ -257,8 +257,6 @@ aside  {
   color: var(--white);
 }
 
-
-
 .todo-enter,
 .project-enter {
   opacity: 0;
