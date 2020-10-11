@@ -1,10 +1,13 @@
 import express from 'express'
 import connectDB from './config/db'
+import cors from 'cors'
 import { userAuth, users, projects, tasks } from './routes'
 
 const app = express()
 
 connectDB()
+
+app.use(cors())
 
 app.use(express.json({ extended: true }))
 

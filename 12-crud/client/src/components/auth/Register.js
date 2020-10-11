@@ -1,7 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { AlertContext, AuthContext } from 'context'
 
-const Register = () => {
+const Register = (props) => {
+
+    const alertContext = useContext(AlertContext)
+    const { alert, showAlert } = alertContext
+
+    const authContext = useContext(AuthContext)
+    const { msg, authenticated, register } = authContext
+
+    useEffect(() => {
+        if (authenticated) props.history.push('/projects')
+        if (msg) showAlert(msg.msg, msg.category)
+    }, [msg, authenticated, props.history])
 
     const [user, setUser] = useState({
         name: '',
@@ -21,10 +33,21 @@ const Register = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
+
+        if (name.trim() === '' || email.trim() === '' || password.trim() === '' || confirm.trim() === '') {
+            return showAlert('All fields are required', 'alert-error')
+        }
+
+        if (password.length < 6) return showAlert('The password must be at least six characters', 'alert-error')
+
+        if(password !== confirm) return showAlert('Password does not match', 'alert-error')
+
+        register({name, email, password})        
     }
 
     return (
         <div className="user-form">
+            { alert ? ( <div className={`alert ${alert.category}`}>{alert.msg}</div> ) : null }
             <div className="form-container dark-shadow">
                 <h1>Register</h1>
                 <form

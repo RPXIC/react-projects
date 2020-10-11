@@ -1,7 +1,8 @@
 import { Router } from 'express'
 const router = Router()
-import { userAuth } from '../controllers/authController'
+import { userAuth, getUser } from '../controllers/authController'
 import { check } from 'express-validator'
+import jwtVerifyer from '../middlewares/auth'
 
 router.post('/',
     [
@@ -9,6 +10,11 @@ router.post('/',
         check('password', 'The password must have a minimum of 6 characters').isLength({ min: 6 })
     ],
     userAuth
+)
+
+router.get('/',
+    jwtVerifyer,
+    getUser
 )
 
 export default router
