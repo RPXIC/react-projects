@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AlertContext, AuthContext } from 'context'
 
-const Register = (props) => {
+const Register = props => {
 
     const alertContext = useContext(AlertContext)
     const { alert, showAlert } = alertContext
@@ -13,6 +13,7 @@ const Register = (props) => {
     useEffect(() => {
         if (authenticated) props.history.push('/projects')
         if (msg) showAlert(msg.msg, msg.category)
+        //eslint-disable-next-line
     }, [msg, authenticated, props.history])
 
     const [user, setUser] = useState({

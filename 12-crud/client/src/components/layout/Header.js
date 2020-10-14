@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useContext, useEffect} from 'react'
+import { AuthContext } from 'context'
 
 const Header = () => {
 
+    const authContext = useContext(AuthContext)
+    const { user, getUser, logout } = authContext
+
+    useEffect(() => {
+        getUser()
+        //eslint-disable-next-line
+    },[])
+
     return (
         <header className="app-header">
-            <p className="username"> Hello, <span>IEP</span></p>
+            { user ? (
+                <p className="username"> Welcome <span>{user.name}</span></p>
+            ) : null}
 
             <nav className="nav">
-                <a href="#!">Logout</a>
+                <button
+                    className="bnt btn-blank logout"
+                    onClick={() => logout()}
+                >Logout</button>
             </nav>
         </header>
     )

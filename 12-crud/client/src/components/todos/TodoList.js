@@ -15,7 +15,7 @@ const TodoList = () => {
     const [actualProject] = project
 
     const handleClick = () => {
-        deleteProject(actualProject.id)
+        deleteProject(actualProject._id)
     }
 
     return (
@@ -28,7 +28,7 @@ const TodoList = () => {
                     : <TransitionGroup>
                         {todosproject.map(todo => (
                             <CSSTransition
-                                key={todo.id}
+                                key={todo._id}
                                 timeout={200}
                                 classNames="todo"
                             >

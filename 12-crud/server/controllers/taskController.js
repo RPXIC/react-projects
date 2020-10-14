@@ -30,8 +30,7 @@ export const addTask = async (req, res) => {
 
 export const getTasks = async (req, res) => {
     try {
-
-        const { project } = req.body
+        const { project } = req.params
 
         const projectExist = await Project.findById(project)
 
@@ -39,7 +38,7 @@ export const getTasks = async (req, res) => {
 
         if (projectExist.owner.toString() !== req.user.id) return res.status(401).json({ msg: 'Not authorized'})
 
-        const tasks = await Task.find({ project })
+        const tasks = await Task.find({ project }).sort({ created: -1 })
 
         res.json(tasks)
     } catch (error) {
@@ -61,8 +60,8 @@ export const updateTask = async (req, res) => {
         if (projectExist.owner.toString() !== req.user.id) return res.status(401).json({ msg: 'Not authorized'})
 
         const newTask = {}
-        if (name) newTask.name = name
-        if (state) newTask.state = state
+        newTask.name = name
+        newTask.state = state
 
         task = await Task.findOneAndUpdate({ _id: req.params.id }, newTask, { new: true })
 
@@ -76,9 +75,9 @@ export const updateTask = async (req, res) => {
 
 export const deleteTask = async (req, res) => {
     try {
-        const { project } = req.body
+        const { id, project } = req.params
 
-        let task = await Task.findById(req.params.id)
+        let task = await Task.findById(id)
         if (!task) return res.status(404).json({ msg: 'Task not foud'})
         
         const projectExist = await Project.findById(project)
@@ -86,7 +85,7 @@ export const deleteTask = async (req, res) => {
 
         if (projectExist.owner.toString() !== req.user.id) return res.status(401).json({ msg: 'Not authorized'})
 
-        await Task.findOneAndRemove({ _id: req.params.id })
+        await Task.findOneAndRemove({ _id: id })
 
         res.json({msg: 'Task Deleted'})
 

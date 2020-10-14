@@ -41,15 +41,14 @@ const TodoForm = () => {
         if (name.trim() === '') return validateTodo()
 
         if (todoselected === null) {
-            todo.projectId = actualProject.id
-            todo.state = false
+            todo.project = actualProject._id
             addTodo(todo)
         } else {
             editTodo(todo)
             cleanTodo()
         }
 
-        getTodos(actualProject.id)
+        getTodos(actualProject._id)
 
         setTodo({
             name: ''

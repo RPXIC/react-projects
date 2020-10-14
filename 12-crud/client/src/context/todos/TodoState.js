@@ -1,46 +1,68 @@
 import React, { useReducer } from 'react'
 import TodoContext from './TodoContext'
 import TodoReducer from './TodoReducer'
-import { TODOS_PROJECT, ADD_TODO, VALIDATE_TODO, DELETE_TODO, TODO_STATE, ACTUAL_TODO, EDIT_TODO, CLEAN_TODO } from 'types'
-import { v4 as uuid } from 'uuid'
+import { TODOS_PROJECT, ADD_TODO, VALIDATE_TODO, DELETE_TODO, ACTUAL_TODO, EDIT_TODO, CLEAN_TODO } from 'types'
+
+const API_URL = process.env.REACT_APP_API_URL
 
 const TodoState = props => {
     const initialState = {
-        todos: [
-            { id: 1, name: 'choose platform', state: true, projectId: 1 },
-            { id: 2, name: 'choose colors', state: false, projectId: 2 },
-            { id: 3, name: 'choose platform pay', state: false, projectId: 3 },
-            { id: 4, name: 'choose hosting', state: true, projectId: 4 },
-            { id: 5, name: 'choose platform', state: true, projectId: 1 },
-            { id: 6, name: 'choose colors', state: false, projectId: 2 },
-            { id: 7, name: 'choose platform pay', state: false, projectId: 3 },
-            { id: 8, name: 'choose platform', state: true, projectId: 4 },
-            { id: 9, name: 'choose colors', state: false, projectId: 1 },
-            { id: 10, name: 'choose platform pay', state: false, projectId: 2 },
-            { id: 11, name: 'choose platform', state: true, projectId: 3 },
-            { id: 12, name: 'choose colors', state: false, projectId: 4 },
-            { id: 13, name: 'choose platform pay', state: false, projectId: 3 }
-        ],
-        todosproject: null,
+        todosproject: [],
         todoerror: false,
         todoselected: null
     }
 
     const [state, dispath] = useReducer(TodoReducer, initialState)
 
-    const getTodos = projectId => {
-        dispath({
-            type: TODOS_PROJECT,
-            payload: projectId
-        })
+    const getTodos = async project => {
+        const token = localStorage.getItem('token')
+
+        try {
+            const result = await fetch(`${API_URL}/api/tasks/${project}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json',
+                            'x-auth-token': token }
+            })
+
+            const { status } = result
+
+            if (status === 200) {
+                const res = await result.json()
+
+                dispath({
+                    type: TODOS_PROJECT,
+                    payload: res
+                })
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    const addTodo = todo => {
-        todo.id = uuid()
-        dispath({
-            type: ADD_TODO,
-            payload: todo
-        })
+    const addTodo = async todo => {
+        const token = localStorage.getItem('token')
+
+        try {
+            const result = await fetch(`${API_URL}/api/tasks`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json',
+                            'x-auth-token': token},
+                body: JSON.stringify(todo)
+            })
+
+            const { status } = result
+    
+            if (status === 200) {
+                await result.json()
+
+                dispath({
+                    type: ADD_TODO,
+                    payload: todo
+                })
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const validateTodo = () => {
@@ -49,30 +71,56 @@ const TodoState = props => {
         })
     }
 
-    const deleteTodo = id => {
-        dispath({
-            type: DELETE_TODO,
-            payload: id
-        })
+    const deleteTodo = async (id, project) => {
+        const token = localStorage.getItem('token')
+
+        try {
+            await fetch(`${API_URL}/api/tasks/${id}/${project}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json',
+                            'x-auth-token': token},
+            })
+            dispath({
+                type: DELETE_TODO,
+                payload: id
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    const toggleState = todo => {
-        dispath({
-            type: TODO_STATE,
-            payload: todo
-        })
+    const editTodo = async todo => {
+        try {
+            const token = localStorage.getItem('token')
+
+            const result = await fetch(`${API_URL}/api/tasks/${todo._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': token
+                },
+                body: JSON.stringify(todo)
+            })
+
+            const { status } = result
+
+            if (status === 200) {
+                const res = await result.json()
+
+                dispath({
+                    type: EDIT_TODO,
+                    payload: res.task
+                })
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const actualTodo = todo => {
         dispath({
             type: ACTUAL_TODO,
-            payload: todo
-        })
-    }
-
-    const editTodo = todo => {
-        dispath({
-            type: EDIT_TODO,
             payload: todo
         })
     }
@@ -86,7 +134,6 @@ const TodoState = props => {
     return (
         <TodoContext.Provider
             value={{
-                todos: state.todos,
                 todosproject: state.todosproject,
                 todoerror: state.todoerror,
                 todoselected: state.todoselected,
@@ -94,7 +141,6 @@ const TodoState = props => {
                 addTodo,
                 validateTodo,
                 deleteTodo,
-                toggleState,
                 actualTodo,
                 editTodo,
                 cleanTodo

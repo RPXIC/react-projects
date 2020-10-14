@@ -10,10 +10,10 @@ router.post('/', jwtVerifyer,
     addTask
 )
 
-router.get('/', jwtVerifyer, getTasks)
+router.get('/:project', jwtVerifyer, getTasks)
 
 router.put('/:id', jwtVerifyer, updateTask)
 
-router.delete('/:id', jwtVerifyer, deleteTask)
+router.delete('/:id/:project', jwtVerifyer, deleteTask)
 
 export default router

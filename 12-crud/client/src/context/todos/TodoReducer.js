@@ -1,16 +1,16 @@
-import { TODOS_PROJECT, ADD_TODO, VALIDATE_TODO, DELETE_TODO, TODO_STATE, ACTUAL_TODO, EDIT_TODO, CLEAN_TODO } from 'types'
+import { TODOS_PROJECT, ADD_TODO, VALIDATE_TODO, DELETE_TODO, ACTUAL_TODO, EDIT_TODO, CLEAN_TODO } from 'types'
 
 export default (state, action) => {
     switch (action.type) {
         case TODOS_PROJECT:
             return {
                 ...state,
-                todosproject: state.todos.filter(todo => todo.projectId === action.payload)
+                todosproject: action.payload
             }
         case ADD_TODO:
             return {
                 ...state,
-                todos: [action.payload, ...state.todos],
+                todosproject: [ ...state.todosproject, action.payload ],
                 todoerror: false
             }
         case VALIDATE_TODO:
@@ -21,13 +21,12 @@ export default (state, action) => {
         case DELETE_TODO:
             return {
                 ...state,
-                todos: state.todos.filter(todo => todo.id !== action.payload)
+                todosproject: state.todosproject.filter(todo => todo._id !== action.payload)
             }
         case EDIT_TODO:
-        case TODO_STATE:
             return {
                 ...state,
-                todos: state.todos.map(todo => todo.id === action.payload.id ? action.payload : todo)
+                todosproject: state.todosproject.map(todo => todo._id === action.payload._id ? action.payload : todo)
             }
         case ACTUAL_TODO:
             return {

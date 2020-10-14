@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken'
 const User = require('../models/User')
 
 export const createUser = async (req, res) => {
-
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
@@ -34,7 +33,6 @@ export const createUser = async (req, res) => {
 
             res.json({ token })
         })
-
     } catch (error) {
         console.log(error)
         return res.status(400).send('Register error')

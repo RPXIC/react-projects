@@ -9,6 +9,7 @@ import Header from './layout/Header'
 import Todo from './todos/Todo'
 import TodoForm from './todos/TodoForm'
 import TodoList from './todos/TodoList'
+import PrivateRoute from './routes/PrivateRoute'
 
 export {
     Login,
@@ -21,5 +22,6 @@ export {
     Header,
     Todo,
     TodoForm,
-    TodoList
+    TodoList,
+    PrivateRoute
 }

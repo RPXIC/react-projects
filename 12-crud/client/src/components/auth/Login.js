@@ -1,7 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { AlertContext, AuthContext } from 'context'
 
-const Login = () => {
+const Login = props => {
+
+    const alertContext = useContext(AlertContext)
+    const { alert, showAlert } = alertContext
+
+    const authContext = useContext(AuthContext)
+    const { msg, authenticated, login } = authContext
+
+    useEffect(() => {
+        if (authenticated) props.history.push('/projects')
+        if (msg) showAlert(msg.msg, msg.category)
+        //eslint-disable-next-line
+    }, [msg, authenticated, props.history])
 
     const [user, setUser] = useState({
         email: '',
@@ -19,10 +32,15 @@ const Login = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
+
+        if (email.trim() === '' || password.trim() === '' ) return showAlert('All fields are required', 'alert-error')
+
+        login({ email, password })
     }
 
     return (
         <div className="user-form">
+            {alert ? ( <div className={`alert ${alert.category}`}>{alert.msg}</div>) : null}
             <div className="form-container dark-shadow">
                 <h1>Login</h1>
                 <form

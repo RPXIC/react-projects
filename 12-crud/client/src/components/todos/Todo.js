@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { ProjectContext, TodoContext } from 'context'
 
 const Todo = ({ todo }) => {
@@ -6,16 +7,18 @@ const Todo = ({ todo }) => {
     const { project } = projectsContext
 
     const todosContext = useContext(TodoContext)
-    const { deleteTodo, getTodos, toggleState, actualTodo } = todosContext
+    const { deleteTodo, getTodos, editTodo, actualTodo } = todosContext
+
+    const [actualProject] = project
 
     const handleDelete = id => {
-        deleteTodo(id)
-        getTodos(project[0].id)
+        deleteTodo(id, actualProject._id)
+        getTodos(actualProject._id)
     }
 
     const handleToggle = todo => {
         todo.state ? (todo.state = false) : (todo.state = true)
-        toggleState(todo.state)
+        editTodo(todo)
     }
 
     const selectTodo = todo => {
@@ -53,11 +56,15 @@ const Todo = ({ todo }) => {
                 <button
                     type="button"
                     className="btn btn-secondary"
-                    onClick={() => handleDelete(todo.id)}
+                    onClick={() => handleDelete(todo._id)}
                 >Delete</button>
             </div>
         </li>
     )
+}
+
+Todo.propTypes = {
+    todo: PropTypes.object.isRequired
 }
 
 export default Todo

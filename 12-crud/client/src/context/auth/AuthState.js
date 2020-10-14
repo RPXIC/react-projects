@@ -10,7 +10,8 @@ const AuthState = props => {
         token: localStorage.getItem('token'),
         authenticated: null,
         user: null,
-        msg: null
+        msg: null,
+        loading: true
     }
 
     const [state,dispatch] = useReducer(AuthReducer, initialState)
@@ -42,19 +43,16 @@ const AuthState = props => {
                     msg,
                     category: 'alert-error'
                 }
-
                 dispatch({
                     type: REGISTER_ERROR,
                     payload: alert
                 })            
             }
         } catch (error) {
-
             const alert = {
                 msg: error.message,
                 category: 'alert-error'
             }
-
             dispatch({
                 type: REGISTER_ERROR,
                 payload: alert
@@ -86,6 +84,57 @@ const AuthState = props => {
         }
     }
 
+    const login = async data => {
+        try {
+            const res = await fetch(`${API_URL}/api/auth`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+
+            const { status } = res
+            
+            if (status === 200) {
+                const response = await res.json()
+
+                dispatch({
+                    type: LOGIN_OK,
+                    payload: response
+                })
+
+                return getUser()
+            }
+    
+            if (status >= 400 && status < 500) {
+                const { msg } = await res.json()
+
+                const alert = {
+                    msg,
+                    category: 'alert-error'
+                }
+                dispatch({
+                    type: LOGIN_ERROR,
+                    payload: alert
+                })            
+            }
+        } catch (error) {
+            const alert = {
+                msg: error.message,
+                category: 'alert-error'
+            }
+            dispatch({
+                type: LOGIN_ERROR,
+                payload: alert
+            })
+        }
+    }
+
+    const logout = () => {
+        dispatch({
+            type: LOGOUT_USER
+        })
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -93,7 +142,11 @@ const AuthState = props => {
                 authenticated: state.authenticated,
                 user: state.user,
                 msg: state.msg,
-                register
+                loading: state.loading,
+                register,
+                login,
+                getUser,
+                logout
             }}
         >
             {props.children}
