@@ -130,6 +130,8 @@ const selectEditProduct = product => ({
 export const editProductAction = product => {
     return async (dispatch) => {
         try {
+            if (product.name.trim() === '' || !product.price) return dispatch( editProductError() )
+
             await axiosClient.put(`/products/${product.id}`, product)
             dispatch ( editProductOk(product) )
         } catch (error) {

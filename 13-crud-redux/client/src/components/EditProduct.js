@@ -14,7 +14,8 @@ const EditProduct = () => {
     })
 
     const editproduct = useSelector( state => state.products.editproduct)
-    
+    const error = useSelector( state => state.products.error)
+
     useEffect(() => {
         setProduct(editproduct)
     },[editproduct])
@@ -34,7 +35,7 @@ const EditProduct = () => {
 
         dispatch( editProductAction(product) )
 
-        history.push('/')
+        if (name.trim() !== '' && price) return history.push('/')
     }
 
     return (
@@ -45,6 +46,8 @@ const EditProduct = () => {
                         <h2 className="text-center mb-4 font-weight-bold">
                             Edit Product
                         </h2>
+
+                        { error ? <p className="font-weight-bold alert alert-danger text-center mt-4">All fields are required</p> : null }
 
                         <form
                             onSubmit={handleSubmit}
