@@ -1,0 +1,19 @@
+{
+  "products": [
+    {
+      "id": 2,
+      "name": "Orange Juice",
+      "price": "102"
+    },
+    {
+      "name": "Orange Juice",
+      "price": "298",
+      "id": 3
+    },
+    {
+      "name": "tequila",
+      "price": 7,
+      "id": 4
+    }
+  ]
+}

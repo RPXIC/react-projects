@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Product } from 'components'
-import { retrieveProductsAction } from 'actions/actionsProduct'
+import { retrieveProductsAction } from 'actions/productActions'
 
 const Products = () => {
 
@@ -9,6 +9,7 @@ const Products = () => {
 
     useEffect(() => {
         dispatch( retrieveProductsAction() )
+        //eslint-disable-next-line
     },[])
 
     const { products, error, loading } = useSelector( state => state.products)

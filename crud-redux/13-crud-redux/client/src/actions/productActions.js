@@ -7,12 +7,15 @@ import {
     RETRIEVE_PRODUCTS_ERROR,
     DELETE_PRODUCT, 
     DELETE_PRODUCT_OK, 
-    DELETE_PRODUCT_ERROR
+    DELETE_PRODUCT_ERROR,
+    SELECT_EDIT_PRODUCT,
+    EDIT_PRODUCT_OK,
+    EDIT_PRODUCT_ERROR
 } from 'types'
 import axiosClient from 'config/axios'
 import Swal from 'sweetalert2'
 
-export const addNewProduct = product => {
+export const addNewProductAction = product => {
     return async (dispatch) => {
         dispatch( addProduct() )
 
@@ -27,7 +30,6 @@ export const addNewProduct = product => {
                 'success'
             )
         } catch (error) {
-            console.log(error)
             dispatch( addProductError(true) )
 
             Swal.fire({
@@ -62,7 +64,6 @@ export const retrieveProductsAction = () => {
             const res = await axiosClient.get('./products')
             dispatch( retrieveProductsOk(res.data) )
         } catch (error) {
-            console.log(error)
             dispatch( retrieveProductsError() )
         }
     }
@@ -86,10 +87,63 @@ const retrieveProductsError = () => ({
 export const deleteProductAction = id => {
     return async (dispatch) => {
         dispatch( deleteProduct(id) )
+
+        try {
+            await axiosClient.delete(`/products/${id}`)
+            dispatch( deleteProductOk () )
+            Swal.fire(
+                'Deleted!',
+                'Your product has been deleted.',
+                'success'
+            )
+        } catch (error) {
+            dispatch( deleteProductError() )
+        }
     }
 }
 
 const deleteProduct = id => ({
     type: DELETE_PRODUCT,
     payload: id
+})
+
+const deleteProductOk = () => ({
+    type: DELETE_PRODUCT_OK
+})
+
+const deleteProductError = () => ({
+    type: DELETE_PRODUCT_ERROR,
+    payload: true
+})
+
+export const selectEditProductAction = product => {
+    return (dispatch) => {
+        dispatch( selectEditProduct(product) )
+    }
+}
+
+const selectEditProduct = product => ({
+    type: SELECT_EDIT_PRODUCT,
+    payload: product
+})
+
+export const editProductAction = product => {
+    return async (dispatch) => {
+        try {
+            await axiosClient.put(`/products/${product.id}`, product)
+            dispatch ( editProductOk(product) )
+        } catch (error) {
+            dispatch( editProductError() )
+        }
+    }
+}
+
+const editProductOk = product => ({
+    type: EDIT_PRODUCT_OK,
+    payload: product
+})
+
+const editProductError = () => ({
+    type: EDIT_PRODUCT_ERROR,
+    payload: true
 })

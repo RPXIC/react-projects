@@ -1,26 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNewProduct } from 'actions/actionsProduct'
+import { editProductAction } from 'actions/productActions'
 
-const NewProduct = ({ history }) => {
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState(0)
+const EditProduct = () => {
+    const history = useHistory()
 
     const dispatch = useDispatch()
 
-    const {loading, error} = useSelector( state => state.products)
+    const [product, setProduct] = useState({
+        name: '',
+        price: ''
+    })
 
-    const addProduct = product => dispatch( addNewProduct(product) )
+    const editproduct = useSelector( state => state.products.editproduct)
+    
+    useEffect(() => {
+        setProduct(editproduct)
+    },[editproduct])
+
+    const handleChange = e => {
+        setProduct({
+            ...product,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    if (!product) return null
+    const { name, price } = product
 
     const handleSubmit = e => {
         e.preventDefault()
 
-        if (name.trim() === '' || price <= 0) return
-
-        addProduct({
-            name,
-            price
-        })
+        dispatch( editProductAction(product) )
 
         history.push('/')
     }
@@ -31,7 +43,7 @@ const NewProduct = ({ history }) => {
                 <div className="card">
                     <div className="card-body">
                         <h2 className="text-center mb-4 font-weight-bold">
-                            Add New Product
+                            Edit Product
                         </h2>
 
                         <form
@@ -45,7 +57,7 @@ const NewProduct = ({ history }) => {
                                     placeholder="Product Name"
                                     name="name"
                                     value={name}
-                                    onChange={e => setName(e.target.value)}
+                                    onChange={handleChange}
                                 />
                             </div>
 
@@ -57,22 +69,19 @@ const NewProduct = ({ history }) => {
                                     placeholder="Product Price"
                                     name="price"
                                     value={price}
-                                    onChange={e => setPrice( Number(e.target.value) )}
+                                    onChange={handleChange}
                                 />
                             </div>
 
                             <button
                                 type="submit"
                                 className="btn btn-primary font-weight-bold text-uppercase d-block w-100"
-                            >Add</button>
+                            >Save</button>
                         </form>
-
-                        { loading ? <p>Loading...</p> : null }
-                        { error ? <p className="alert alert-danger p2 mt-4 text-center">Error</p> : null}
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-export default NewProduct
+export default EditProduct
