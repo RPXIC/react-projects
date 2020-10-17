@@ -18,4 +18,4 @@ app.use('/api/auth', userAuth)
 app.use('/api/projects', projects)
 app.use('/api/tasks', tasks)
 
-app.listen(port, '0.0.0.0', () => console.log(`Server up on port ${port}`))
+app.listen(port, () => console.log(`Server up on port ${port}`))
