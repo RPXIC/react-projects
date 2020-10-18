@@ -41,22 +41,24 @@ const Register = props => {
 
         if (password.length < 6) return showAlert('The password must be at least six characters', 'alert-error')
 
-        if(password !== confirm) return showAlert('Password does not match', 'alert-error')
+        if(password !== confirm) return showAlert('Passwords not equal', 'alert-error')
 
         register({name, email, password})        
     }
 
     return (
         <div className="user-form">
-            { alert ? ( <div className={`alert ${alert.category}`}>{alert.msg}</div> ) : null }
+            { alert ? ( <div data-cy="alert" className={`alert ${alert.category}`}>{alert.msg}</div> ) : null }
             <div className="form-container dark-shadow">
-                <h1>Register</h1>
+                <h1 data-cy="title">Register</h1>
                 <form
+                    data-cy="register-form"
                     onSubmit={handleSubmit}
                 >
                     <div className="form-field">
                         <label htmlFor="name">Name</label>
                         <input
+                            data-cy="name-input"
                             type="text"
                             id="name"
                             name="name"
@@ -69,6 +71,7 @@ const Register = props => {
                     <div className="form-field">
                         <label htmlFor="email">Email</label>
                         <input
+                            data-cy="email-input"
                             type="email"
                             id="email"
                             name="email"
@@ -81,6 +84,7 @@ const Register = props => {
                     <div className="form-field">
                         <label htmlFor="password">Password</label>
                         <input
+                            data-cy="password-input"
                             type="password"
                             id="password"
                             name="password"
@@ -93,6 +97,7 @@ const Register = props => {
                     <div className="form-field">
                         <label htmlFor="confirm">Confirm Password</label>
                         <input
+                            data-cy="confirm-input"
                             type="password"
                             id="confirm"
                             name="confirm"
@@ -103,11 +108,11 @@ const Register = props => {
                     </div>
 
                     <div className="form-field">
-                        <input type="submit" className="btn btn-primary btn-block" value="Register" />
+                        <input data-cy="submit" type="submit" className="btn btn-primary btn-block" value="Register" />
                     </div>
                 </form>
 
-                <Link to={'/'} className="account-link">Login</Link>
+                <Link data-cy="login" to={'/'} className="account-link">Login</Link>
             </div>
         </div>
     )

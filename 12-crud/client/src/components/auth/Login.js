@@ -42,13 +42,15 @@ const Login = props => {
         <div className="user-form">
             {alert ? ( <div className={`alert ${alert.category}`}>{alert.msg}</div>) : null}
             <div className="form-container dark-shadow">
-                <h1>Login</h1>
+                <h1 data-cy="title">Login</h1>
                 <form
                     onSubmit={handleSubmit}
+                    data-cy="login-form"
                 >
                     <div className="form-field">
                         <label htmlFor="email">Email</label>
                         <input
+                            data-cy="email-input"
                             type="email"
                             id="email"
                             name="email"
@@ -61,6 +63,7 @@ const Login = props => {
                     <div className="form-field">
                         <label htmlFor="password">Password</label>
                         <input
+                            data-cy="password-input"
                             type="password"
                             id="password"
                             name="password"
@@ -71,11 +74,16 @@ const Login = props => {
                     </div>
 
                     <div className="form-field">
-                        <input type="submit" className="btn btn-primary btn-block" value="Login" />
+                        <input
+                            data-cy="submit-login"
+                            type="submit" 
+                            className="btn btn-primary btn-block" 
+                            value="Login"    
+                        />
                     </div>
                 </form>
 
-                <Link to={'/register'} className="account-link">Register</Link>
+                <Link data-cy="register" to={'/register'} className="account-link">Register</Link>
             </div>
         </div>
     )

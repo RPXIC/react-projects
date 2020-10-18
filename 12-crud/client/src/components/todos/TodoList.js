@@ -10,7 +10,7 @@ const TodoList = () => {
     const todosContext = useContext(TodoContext)
     const { todosproject } = todosContext
 
-    if (!project) return <h2>Select project</h2>
+    if (!project) return <h2 data-cy="select">Select project</h2>
 
     const [actualProject] = project
 

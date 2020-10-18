@@ -19,6 +19,7 @@ const Header = () => {
 
             <nav className="nav">
                 <button
+                    data-cy="logout"
                     className="bnt btn-blank logout"
                     onClick={() => logout()}
                 >Logout</button>
