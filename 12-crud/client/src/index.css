@@ -245,12 +245,12 @@ aside  {
 .msg:hover {
   cursor: default;
 }
-.complete,
+.completed,
 .correct {
   background-color: rgba(154, 252, 154, .3);
   color: var(--gray3);
 }
-.incomplete{
+.incompleted{
   background-color: rgba(255, 178, 178, .4);
   color: var(--gray3);
 }

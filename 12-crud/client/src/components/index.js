@@ -10,6 +10,7 @@ import Todo from './todos/Todo'
 import TodoForm from './todos/TodoForm'
 import TodoList from './todos/TodoList'
 import PrivateRoute from './routes/PrivateRoute'
+import Alert from './layout/Alert'
 
 export {
     Login,
@@ -23,5 +24,6 @@ export {
     Todo,
     TodoForm,
     TodoList,
-    PrivateRoute
+    PrivateRoute,
+    Alert
 }

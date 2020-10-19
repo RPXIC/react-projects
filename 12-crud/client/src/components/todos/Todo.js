@@ -26,34 +26,38 @@ const Todo = ({ todo }) => {
     }
 
     return (
-        <li className="todo shadow">
+        <li data-cy="todo" className="todo shadow">
             <p>{todo.name}</p>
             <div className="state">
                 {todo.state
                     ? (
                         <button
+                            data-cy="todo-completed"
                             type="button"
-                            className="complete"
+                            className="completed"
                             onClick={() => handleToggle(todo)}
-                        >Complete</button>
+                        >Completed</button>
                     )
                     : (
                         <button
+                            data-cy="todo-incompleted"
                             type="button"
-                            className="incomplete"
+                            className="incompleted"
                             onClick={() => handleToggle(todo)}
-                        >Incomplete</button>
+                        >Incompleted</button>
                     )
                 }
             </div>
 
             <div className="actions">
                 <button
+                    data-cy="btn-edit"
                     type="button"
                     className="btn btn-primary"
                     onClick={() => selectTodo(todo)}
                 >Edit</button>
                 <button
+                    data-cy="btn-delete"
                     type="button"
                     className="btn btn-secondary"
                     onClick={() => handleDelete(todo._id)}

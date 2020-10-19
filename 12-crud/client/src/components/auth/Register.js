@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Alert } from 'components'
 import { AlertContext, AuthContext } from 'context'
 
 const Register = props => {
@@ -48,7 +49,7 @@ const Register = props => {
 
     return (
         <div className="user-form">
-            { alert ? ( <div data-cy="alert" className={`alert ${alert.category}`}>{alert.msg}</div> ) : null }
+            <Alert alert={alert} />
             <div className="form-container dark-shadow">
                 <h1 data-cy="title">Register</h1>
                 <form

@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Alert } from 'components'
 import { AlertContext, AuthContext } from 'context'
 
 const Login = props => {
@@ -40,7 +41,7 @@ const Login = props => {
 
     return (
         <div className="user-form">
-            {alert ? ( <div className={`alert ${alert.category}`}>{alert.msg}</div>) : null}
+            <Alert alert={alert}/>
             <div className="form-container dark-shadow">
                 <h1 data-cy="title">Login</h1>
                 <form

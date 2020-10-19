@@ -51,5 +51,26 @@ describe('<Register />', () => {
             .should('equal', 'Select project')
 
         cy.get('[data-cy=logout]').click()
+
+        cy.url().should('eq', 'http://localhost:3000/')
+    })
+
+    it('If you try to register a user that already exists', () => {
+        cy.visit('/register')
+
+        cy.get('[data-cy=name-input]').type('rpxic')
+        cy.get('[data-cy=email-input]').type('rpxic@mail.com')
+        cy.get('[data-cy=password-input]').type('123456')
+        cy.get('[data-cy=confirm-input]').type('123456')
+
+        cy.get('[data-cy=submit]').click()
+
+        cy.url().should('eq', 'http://localhost:3000/register')
+
+        cy.get('[data-cy=alert]')
+            .should('exist')
+            .invoke('text')
+            .should('equal', 'This email is already registered')
+
     })
 })

@@ -22,7 +22,7 @@ const ProjectsList = () => {
     if (!projects.length) return <p>No projects</p>
 
     return (
-        <ul className="projects-list">
+        <ul data-cy="projects-list" className="projects-list">
 
             { alert ? ( <div className={`alert ${alert.category}`}>{alert.msg}</div>) : null}
 

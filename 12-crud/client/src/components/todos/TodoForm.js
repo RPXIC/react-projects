@@ -62,6 +62,7 @@ const TodoForm = () => {
             >
                 <div className="container-input">
                     <input
+                    data-cy="input-todo"
                         type="text"
                         className="input-text"
                         placeholder="Todo name..."
@@ -73,13 +74,14 @@ const TodoForm = () => {
 
                 <div className="container-input">
                     <input
+                        data-cy="submit-todo"
                         type="submit"
                         className="btn btn-primary btn-submit btn-block"
                         value={todoselected ? 'Edit TODO' : 'Add TODO'}
                     />
                 </div>
             </form>
-            { todoerror ? <p className="msg error">Name are required</p> : null}
+            { todoerror ? <p data-cy="alert" className="msg error">Name is required</p> : null}
         </div>
     )
 }
