@@ -1,6 +1,9 @@
+import { useState } from 'react'
+import Router from 'next/router'
+import firebase from '../firebase'
 import { Form, Container, InputSubmit, H1, Error } from 'components/ui/Form'
 import useValidation from 'hooks/useValidation'
-import validateRegister from 'utils/validate'
+import validateRegister from 'utils/validateRegister'
 
 const INITIAL_STATE = {
   name: '',
@@ -10,7 +13,17 @@ const INITIAL_STATE = {
 
 const Register = () => {
 
-  const register = () => console.log('register')
+  const [error, setError] = useState(false)
+
+  const register = async() => {
+    try {
+      await firebase.register(name, email, password)
+      Router.push('/')
+    } catch (error) {
+      console.error('Register error', error.message)
+      setError(error.message)
+    }
+  }
   
   const { values ,errors, handleSubmit, handleChange, handleBlur } = useValidation(INITIAL_STATE, validateRegister, register)
   
@@ -65,6 +78,7 @@ const Register = () => {
         </Container>
 
         {errors.password && <Error>{errors.password}</Error>}
+        {error && <Error>{error}</Error>}
 
         <InputSubmit type="submit" value="Register" />
       </Form>

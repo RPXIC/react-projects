@@ -1,11 +1,15 @@
 import React from 'react'
 import Head from 'next/head'
+import firebase, { FirebaseContext } from '../firebase'
+import useAuth from 'hooks/useAuth'
 import { Header } from 'components'
 import { globalStyles } from "./styles"
 
 const MyApp = ({ Component, pageProps }) => {
+  const user = useAuth()
+
   return (
-    <>
+    <FirebaseContext.Provider value={{firebase, user}}>
       <style jsx global>
         {globalStyles}
       </style>
@@ -20,7 +24,7 @@ const MyApp = ({ Component, pageProps }) => {
       <Header />
 
       <Component {...pageProps} />
-    </>
+    </FirebaseContext.Provider>
   )
 }
 
