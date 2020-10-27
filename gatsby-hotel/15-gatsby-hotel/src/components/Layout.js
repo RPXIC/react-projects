@@ -1,7 +1,8 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import Header from './Header'
 import { Global, css } from '@emotion/core'
+import Header from './Header'
+import Footer from './Footer'
 
 const Layout = (props) => {
     return (
@@ -9,11 +10,16 @@ const Layout = (props) => {
             <Global 
                 styles={css`
                     html {
-                        font-size: 62.5%
+                        font-size: 62.5%;
+                        box-sizing: border-box;
+                    }
+                    *, *:before, *:after {
+                        box-sizing: inherit;
                     }
                     body {
-                        font-size: 1.6rem;
+                        font-size: 1.8rem;
                         line-height: 1.5;
+                        font-family: 'PT Sans', sans-serif;
                     }
                     h1, h2, h3 {
                         margin: 0;
@@ -34,11 +40,12 @@ const Layout = (props) => {
             />
             <Helmet>
                 <title>Gatsby Hotel</title>
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,700;1,400&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
             </Helmet>
             <Header />
-            {props.children}
+                {props.children}
+            <Footer />
         </>
     )
 }
