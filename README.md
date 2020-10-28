@@ -24,4 +24,4 @@
 
 14 - product hunt - https://product-hunt-813a2.web.app/
 
-15 - gatsby hotel - 
+15 - gatsby hotel - https://gatsby-hotel-rpxic.netlify.app/

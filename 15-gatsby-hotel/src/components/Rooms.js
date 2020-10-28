@@ -1,8 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
 import Image from 'gatsby-image'
-import { css } from '@emotion/core'
+import { Layout } from '../components'
+import { Main, Title } from '../styles/RoomsStyles'
 
 export const query = graphql`
     query ($slug: String!) {
@@ -21,29 +21,15 @@ export const query = graphql`
 `
 
 const RoomsTemplate = ({ data: { allDatoCmsRoom: { nodes } } }) => {
-
     const { title, content, image } = nodes[0]
 
     return (
         <Layout>
-            <main
-                css={css`
-                    margin: 0 auto;
-                    max-width: 1200px;
-                    width: 95%;
-                `}
-            >
-                <h1
-                    css={css`
-                        text-align: center;
-                        margin-top: 4rem;
-                    `}
-                >{title}</h1>
+            <Main>
+                <Title>{title}</Title>
                 <p>{content}</p>
-                <Image 
-                    fluid={image.fluid}
-                />
-            </main>
+                <Image fluid={image.fluid} />
+            </Main>
         </Layout>
     )
 }

@@ -1,8 +1,7 @@
-import React from 'react'
 import { Link } from 'gatsby'
 import styled from '@emotion/styled'
 
-const NavBar = styled.nav`
+export const NavBar = styled.nav`
     display: flex;
     justify-content: center;
     padding-bottom: 3rem;
@@ -12,7 +11,7 @@ const NavBar = styled.nav`
     }
 `
 
-const NavLink = styled(Link)`
+export const NavLink = styled(Link)`
     color: #fff;
     font-size: 1.6rem;
     font-weight: 700;
@@ -29,14 +28,3 @@ const NavLink = styled(Link)`
         border-bottom: 2px solid #fff;
     }
 `
-
-const Nav = () => {
-    return (
-        <NavBar>
-            <NavLink to={'/'} activeClassName="actual-page">Home</NavLink>
-            <NavLink to={'/about'} activeClassName="actual-page">About</NavLink>
-        </NavBar>
-    )
-}
-
-export default Nav
