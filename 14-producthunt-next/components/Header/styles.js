@@ -4,6 +4,7 @@ export const HeaderContainer = styled.div`
     max-width: 1200px;
     width: 95%inherit;
     margin: 0 auto;
+    padding: 0 1rem;
     @media (min-width: 768px) {
         display: flex;
         justify-content: space-between;

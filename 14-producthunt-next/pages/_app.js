@@ -1,8 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import firebase, { FirebaseContext } from '../firebase'
+import firebase, { FirebaseContext } from '../Firebase/index'
 import useAuth from 'hooks/useAuth'
-import { Header } from 'components'
+import { Header } from '../components'
 import globalStyles from "../styles/globalStyles"
 
 const MyApp = ({ Component, pageProps }) => {

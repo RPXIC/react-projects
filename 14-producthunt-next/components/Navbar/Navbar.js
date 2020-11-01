@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import Link from 'next/link'
-import { FirebaseContext } from '../../firebase'
+import { FirebaseContext } from 'Firebase/index'
 import { Nav } from './styles'
 
 const Navbar = () => {

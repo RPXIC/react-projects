@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Link from 'next/link'
 import { Searcher, Navbar, Button } from 'components'
-import { FirebaseContext } from '../../firebase'
+import { FirebaseContext } from 'Firebase/index'
 import { HeaderContainer, HeaderMain, Logo, FlexRowCenter, Welcome } from './styles'
 
 const Header = () => {

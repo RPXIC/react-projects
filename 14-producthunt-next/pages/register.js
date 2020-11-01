@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Router from 'next/router'
-import firebase from '../firebase'
+import firebase from 'Firebase'
 import { Form, Container, InputSubmit, H1, Error } from 'components/ui/Form'
 import useValidation from 'hooks/useValidation'
 import validateRegister from 'utils/validateRegister'

@@ -1,10 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
-import { FirebaseContext } from '../../firebase'
+import { FirebaseContext } from '../../Firebase/index'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { Error404, Button } from 'components'
 import { Container, InputSubmit } from 'components/ui/Form'
-import { H1, ProductContainer, CommentsTitle, Votes, Comment, Bold, Owner } from '../../styles/productsStyles'
+import { H1, ProductContainer, CommentsTitle, Votes, Comment, Bold, Owner } from 'styles/productsStyles'
 
 const Product = () => {
     const [product, setProduct] = useState({})

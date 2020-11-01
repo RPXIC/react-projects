@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import Router from 'next/router'
-import { FirebaseContext } from '../firebase'
+import { FirebaseContext } from 'Firebase'
 import FileUploader from 'react-firebase-file-uploader'
 import { Error404 } from 'components'
 import { Form, Container, InputSubmit, H1, Error } from 'components/ui/Form'
