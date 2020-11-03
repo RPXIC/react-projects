@@ -11,14 +11,6 @@ const Header = () => {
         <HeaderMain>
             <HeaderContainer>
                 <FlexRowCenter>
-                    <Link href="/">
-                        <Logo>P</Logo>
-                    </Link>
-                    <Searcher />
-                    <Navbar />
-                </FlexRowCenter>
-
-                <FlexRowCenter>
                 { user ? (
                     <>
                         <Welcome>Hello: {user.displayName}</Welcome>
@@ -38,6 +30,16 @@ const Header = () => {
                     </>
                 )}
                 </FlexRowCenter>
+
+                <FlexRowCenter>
+                    <Link href="/">
+                        <Logo>P</Logo>
+                    </Link>
+                    <Searcher />
+                </FlexRowCenter>
+                
+                <Navbar />
+
             </HeaderContainer>
         </HeaderMain>
     )
