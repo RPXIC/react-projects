@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> - Appointments 1`] = `
+Array [
+  <div
+    class="appointment"
+    data-testid="appointment"
+  >
+    <p>
+      Pet: 
+      <span>
+        my pet
+      </span>
+    </p>
+    <p>
+      owner: 
+      <span>
+        rpxic
+      </span>
+    </p>
+    <p>
+      Date: 
+      <span>
+        2019-01-10
+      </span>
+    </p>
+    <p>
+      Time: 
+      <span>
+        12:00
+      </span>
+    </p>
+    <p>
+      Symptoms: 
+      <span>
+        No drink
+      </span>
+    </p>
+    <button
+      class="button delete u-full-width"
+      data-testid="delete-btn"
+    >
+      Delete ×
+    </button>
+  </div>,
+]
+`;
