@@ -18,7 +18,7 @@
 
 11 - drinks recipes - https://drink-recipes-rpxic.netlify.app/
 
-12 - crud - https://crud-rpxic.netlify.app/
+12 - crud - Undeployed
 
 13 - crud-redux - https://crud-redux-rpxic.netlify.app/
 
